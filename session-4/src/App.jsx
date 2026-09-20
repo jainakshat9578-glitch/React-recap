@@ -6,6 +6,8 @@ const App = () => {
   const [title, settitle] = useState("")
   const [desc, setdesc] = useState("")
 
+  const [edit, setedit] = useState(null)
+
   const [postData, setpostData] = useState(JSON.parse(localStorage.getItem("FormData")|| []))
 
 
@@ -19,10 +21,19 @@ const App = () => {
   const SubmitHandler = (e)=>{ 
     e.preventDefault();
 
+    if(edit != null){
+       const copy = [...postData]
+       copy[edit] = {title,desc}
+       setpostData(copy)
+       setedit(null)
+    }
+    else{
     const copyArr = [...postData]; //copy krlo postdata ko copyArr me
     copyArr.push({title,desc}) // push krdo array me title and desc object ki form me
+    // push-> array ke last me element ko add krta hai
     setpostData(copyArr);
-    
+    }
+     
     settitle("");
     setdesc("");
   }
@@ -30,6 +41,7 @@ const App = () => {
   const deletePost = (idx)=>{
     const copyArr = [...postData]
     copyArr.splice(idx,1); // jobhi index aarha voh lo usko 1 elemnet ko krdo delete
+    // splice-> do chiz leti hai kis index se delete krna hai or kitne element delete krne hai
     setpostData(copyArr)
   }
 
@@ -50,7 +62,7 @@ const App = () => {
          className='border-2 rounded-md p-2' type="text" placeholder='Enter Your post desc' />
           <button className='bg-blue-500 rounded-xl h-10 w-30 active:scale-90'>Create Post</button>
       </form>
-      <Card postData={postData} deletePost={deletePost} />
+      <Card postData={postData} deletePost={deletePost} setedit={setedit} settitle={settitle} setdesc={setdesc}/>
     </div>
   )
 }
