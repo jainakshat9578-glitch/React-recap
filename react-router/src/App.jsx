@@ -6,6 +6,8 @@ import Contact from './pages/Contact'
 import Service from './pages/Service'
 import Mobile from './pages/Mobile'
 import Laptop from './pages/Laptop'
+import Course from './pages/Course'
+import CourseDetails from './pages/CourseDetails'
 
 const App = () => {
   return (
@@ -15,15 +17,23 @@ const App = () => {
         <Link to="/about">About</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/service">Service</Link>
+        <Link to="/course">Courses</Link>
       </div>
+
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
+
+        
         <Route path='/service' element={<Service />}>
           <Route path='mobile' element={<Mobile />} />
           <Route path='laptop' element={<Laptop />} />
-        </Route>
+        </Route> 
+
+        <Route path='/course' element={<Course />} />
+        <Route path='/course/:id' element={<CourseDetails />} />
+
         <Route path='*' element={<h1 className='flex items-center justify-center mt-80 text-red-500'>404 | Page Not Found</h1>}/>
       </Routes>
     </div>
