@@ -17,7 +17,7 @@
 import React from 'react'
 
 // 2nd way to use react.memo()
-const About = ({users}) => {
+const About = () => {
   console.log("About rendering")
   return (
     <div>
@@ -26,10 +26,12 @@ const About = ({users}) => {
   )
 }
 
-export default React.memo(About,(prevProp,nextProp)=>{
-   const same = prevProp.users.name === nextProp.users.id
+export default React.memo(About)
+// export default React.memo(About,(prevProp,nextProp)=>{
+//   //  return prevProp.users===nextProp.users
+//    // ab har baar name change hone pr re-render hoga baaki nhi hoga
 
-   console.log(same ? "no-re-render" : "re-render")
-
-   return same;
-  })
+//   //  return prevProp.users.id === nextProp.users.id
+//    // ab about  re-render nhi hoga kyuki id pe check lagaya hai or id toh same hai hamesha
+//    // toh ye condition hamesha true hai isliye no-re-render !
+//   })
